@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DetailsComponent {
   constructor(private router : ActivatedRoute, private api : ApiService){
-    this.router.params.subscribe(data => {
+    this.router.params.subscribe((data: { [x: string]: number; }) => {
       console.log(data['id'])
       this.hotelId =data['id']
     })
@@ -21,7 +21,7 @@ export class DetailsComponent {
   hotelId! :number
   singleHotl : any 
   ngOnInit(){
-    this.api.getById(this.hotelId).subscribe(resp => {
+    this.api.getById(this.hotelId).subscribe((resp: any) => {
       console.log(resp)
       this.singleHotl = resp
     })

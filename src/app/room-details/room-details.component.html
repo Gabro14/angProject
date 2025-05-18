@@ -1,48 +1,53 @@
-<p>room-details works!</p>
+<p class="status-text">room-details works!</p>
 
-
-
-
-<main>
-    <div class="left">
-    
-<div class="card" style="width: 18rem;" >
-
-    <div class="card-body">
-      <h5 class="card-title">{{singleRoom.name}}</h5>
-      <p class="card-text">Price Per Night - {{singleRoom.pricePerNight}}</p>
-      <p class="card-text">Max Guests -  {{singleRoom.maximumGuests}}</p>
-
-      
-
-
+<main class="room-details-container">
+  <section class="left">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">{{ singleRoom.name }}</h2>
+        <p class="card-text"><strong>Price Per Night:</strong> {{ singleRoom.pricePerNight | currency }}</p>
+        <p class="card-text"><strong>Max Guests:</strong> {{ singleRoom.maximumGuests }}</p>
+      </div>
     </div>
 
+    <div class="imgParent">
+      <img 
+        *ngFor="let img of singleRoom.images" 
+        [src]="img.source" 
+        alt="Room Image" 
+        class="room-image"
+      />
+    </div>
+  </section>
 
-  </div>
+  <section class="right">
+    <form (ngSubmit)="book()" class="booking-form">
+      <label>
+        Check-In Date:
+        <input type="date" [(ngModel)]="checkInDate" name="checkInDate" required />
+      </label>
 
+      <label>
+        Check-Out Date:
+        <input type="date" [(ngModel)]="checkOutDate" name="checkOutDate" required />
+      </label>
 
-  <div class="imgParent">
-           <img [src]="img.source" class="card-img-top" alt="..."  *ngFor="let img of singleRoom.images">
-  </div>
-</div>
+      <label>
+        Customer Name:
+        <input type="text" [(ngModel)]="customerName" name="customerName" placeholder="Your full name" required />
+      </label>
 
-<div class="rgiht">
+      <label>
+        Customer ID:
+        <input type="text" [(ngModel)]="customerId" name="customerId" placeholder="ID / Passport number" required />
+      </label>
 
-    <input type="date" [(ngModel)]="checkInDate">
-    <input type="date" [(ngModel)]="checkOutDate">
-        <input type="text" [(ngModel)]="customerName">
-        <input type="text" [(ngModel)]="customerId">
-        <input type="text" [(ngModel)]="customerPhone">
-        <button (click)="book()" >Book</button>
-      <!-- 
-  "checkInDate": "2025-05-17T12:40:49.812Z",
-  "checkOutDate": "2025-05-17T12:40:49.812Z",
-  "customerName": "string",
-  "customerId": "string",
-  "customerPhone": "string" -->
+      <label>
+        Customer Phone:
+        <input type="text" [(ngModel)]="customerPhone" name="customerPhone" placeholder="+995 5XX XX XX XX" required />
+      </label>
 
-
-    
-</div>
+      <button type="submit" class="btn-book">Book Now</button>
+    </form>
+  </section>
 </main>
